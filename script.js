@@ -24,6 +24,29 @@ document.addEventListener("DOMContentLoaded",()=>{
         ].filter(n => n!==null);
     };
   
-    
+    const isSolved=()=>cells.slice(0,-1).every((cells,i)=>cells.innerHTML===(i+1).toString());
+    const shufflePuzzle=()=>{
+        winMessage.classList.add("hidden");
+        for(let i=0;i<100;i++){
+            const emptyCell=cells.find(cell=>cell.classList.contains("empty"));
+            const emptyIndex=cells.indexOf(emptyCell);
+            const neighbors=getAdjancentIndices(emptyIndex);
+            const randomNeighbor=neighbors[Math.floor(Math.random() * neighbors.length)];
+            swapCells(cells[randomNeighbor],emptyCell);
+        }
+    }
+    puzzle.addEventListener("click",e=>{
+        const cell=e.target;
+        if(!cell.classList.contains("empty")){
+            const emptyCell=cells.find(cell=>cell.classList.contains("empty"));
+            const cellIndex=cells.indexOf(cell);
+            const emptyIndex=cells.indexOf(emptyCell);
+            if(isAdjacent(cellIndex,emptyIndex)){
+                swapCells(cell,emptyCell);
+                if(isSolved()) winMessage.classList.remove("hidden")
+            }
+        }
+    })
+    shuffleButton.addEventListener("click",shufflePuzzle)
     
 })
