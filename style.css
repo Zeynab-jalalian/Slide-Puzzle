@@ -9,6 +9,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background: #d3d3d3;
 }
 .puzzle-container{
@@ -60,4 +61,12 @@ body{
 }
 #shuffle-button:active{
     transform: translateY(2px);
+}
+#win-message{
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: green;
+}
+.hidden{
+    visibility: hidden;
 }
